@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kadalnilapanchangam.pages.dev/sitemap.xml

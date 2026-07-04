@@ -1,0 +1,10 @@
+{
+  "name": "கடல்நிலா பஞ்சாங்கம் - Tamil Panchangam & Jothidam",
+  "short_name": "பஞ்சாங்கம்",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FBF3E1",
+  "theme_color": "#8c2f22",
+  "lang": "ta",
+  "icons": []
+}
