@@ -19,6 +19,7 @@
 <meta name="twitter:title" content="இன்றைய தமிழ் பஞ்சாங்கம் - ராகு காலம், ஜாதகம், ராசி பலன்">
 <meta name="twitter:description" content="தினசரி பஞ்சாங்கம், ஜாதகம், பொருத்தம், முகூர்த்தம் - இலவசமாக தமிழில்.">
 <meta name="theme-color" content="#8c2f22">
+<meta name="google-site-verification" content="W2U2GWZ15MZSLIfdau-xHzwiD-Z9TUqTjDm7PvHnTFs" />
 <link rel="manifest" href="manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -59,11 +60,16 @@
       "@type": "Question",
       "name": "நட்சத்திர பொருத்தம் எப்படி பார்ப்பது?",
       "acceptedAnswer": { "@type": "Answer", "text": "மணமகன் மற்றும் மணமகளின் நட்சத்திரங்களை தேர்ந்தெடுத்து, தார பலம் அடிப்படையிலான அடிப்படை பொருத்தத்தை இந்த தளத்தில் இலவசமாக அறியலாம்." }
+    },
+    {
+      "@type": "Question",
+      "name": "ஜாதகம் எப்படி கணக்கிடப்படுகிறது?",
+      "acceptedAnswer": { "@type": "Answer", "text": "பிறந்த தேதி, நேரம், இடத்தை வைத்து சூரிய ராசி, சந்திர ராசி, ஜென்ம நட்சத்திரம் மற்றும் கிரக நிலைகள் கணக்கிடப்படுகின்றன." }
     }
   ]
 }
 </script>
-<meta name="google-site-verification" content="W2U2GWZ15MZSLIfdau-xHzwiD-Z9TUqTjDm7PvHnTFs" /></head>
+</head>
 <body>
 
 <div class="thread-deco" aria-hidden="true"></div>
@@ -88,7 +94,6 @@
 
 <main id="top">
 
-  <!-- HERO / TODAY STRIP -->
   <section class="hero">
     <div class="wrap hero-grid">
       <div class="hero-copy">
@@ -117,7 +122,6 @@
     </div>
   </section>
 
-  <!-- LOCATION BAR -->
   <section class="location-bar">
     <div class="wrap location-row">
       <label for="cityInput">📍 இடம்:</label>
@@ -135,28 +139,21 @@
     </div>
   </section>
 
-  <!-- PANCHANGAM DETAIL -->
   <section id="panchangam" class="section">
     <div class="wrap">
       <p class="section-eyebrow">01 · தினசரி கணிப்பு</p>
       <h2 class="section-title">விரிவான பஞ்சாங்கம்</h2>
-      <div class="panch-grid" id="panchGrid">
-        <!-- filled by JS -->
-      </div>
-      <div class="kalam-grid" id="kalamGrid">
-        <!-- rahu/yama/gulika filled by JS -->
-      </div>
+      <div class="panch-grid" id="panchGrid"></div>
+      <div class="kalam-grid" id="kalamGrid"></div>
       <p class="disclaimer">* இந்தக் கணிப்புகள் வானியல் தோராய சூத்திரங்களைப் (Lahiri Ayanamsa) பயன்படுத்தி கணக்கிடப்படுகின்றன. அச்சு பஞ்சாங்கங்களுடன் சிறு நிமிட வித்தியாசம் இருக்கலாம்.</p>
     </div>
   </section>
 
-  <!-- JATHAGAM CALCULATOR -->
   <section id="jathagam" class="section alt">
     <div class="wrap">
       <p class="section-eyebrow">02 · பிறப்பு விவரம்</p>
       <h2 class="section-title">ஜாதக கணிப்பான்</h2>
       <p class="section-desc">உங்கள் பிறந்த தேதி, நேரம், இடத்தை உள்ளிட்டு சூரிய ராசி, சந்திர ராசி, நட்சத்திரம் மற்றும் கிரக நிலைகளை அறியுங்கள்.</p>
-
       <form id="jathagamForm" class="jform">
         <div class="jfield">
           <label for="jDob">பிறந்த தேதி</label>
@@ -178,7 +175,6 @@
         </div>
         <button type="submit" class="btn-primary">ஜாதகம் காண்க</button>
       </form>
-
       <div id="jathagamResult" class="jathagam-result hidden">
         <div class="jr-summary" id="jrSummary"></div>
         <div class="graha-table-wrap">
@@ -187,21 +183,19 @@
             <tbody id="grahaTableBody"></tbody>
           </table>
         </div>
-        <p class="disclaimer">* சூரியன் &amp; சந்திரன் துல்லியமான கணக்கீடு. புதன், சுக்கிரன், செவ்வாய், குரு, சனி, ராகு/கேது - சராசரி கிரக நிலை (mean longitude) அடிப்படையில் ஒரு பொது வழிகாட்டி மட்டுமே. முழுமையான ஜாதகத்திற்கு அனுபவம் வாய்ந்த ஜோதிடரை அணுகவும்.</p>
+        <p class="disclaimer">* சூரியன் &amp; சந்திரன் துல்லியமான கணக்கீடு. புதன், சுக்கிரன், செவ்வாய், குரு, சனி, ராகு/கேது - சராசரி கிரக நிலை (mean longitude) அடிப்படையில் ஒரு பொது வழிகாட்டி மட்டுமே.</p>
       </div>
     </div>
   </section>
 
-  <!-- RASI PALAN -->
   <section id="rasipalan" class="section">
     <div class="wrap">
       <p class="section-eyebrow">03 · இன்றைய பலன்</p>
       <h2 class="section-title">ராசி பலன்</h2>
-      <div class="rasi-grid" id="rasiGrid"><!-- filled by JS --></div>
+      <div class="rasi-grid" id="rasiGrid"></div>
     </div>
   </section>
 
-  <!-- POROTHAM -->
   <section id="porutham" class="section alt">
     <div class="wrap">
       <p class="section-eyebrow">04 · திருமண பொருத்தம்</p>
@@ -214,11 +208,10 @@
         <button id="checkPorutham" class="btn-primary">பொருத்தம் பார்க்க</button>
       </div>
       <div id="poruthamResult" class="porutham-result hidden"></div>
-      <p class="disclaimer">* இது தார பலம் (Nakshatra counting) அடிப்படையிலான ஒரு எளிய குறிப்பு மட்டுமே. முழுமையான 10 பொருத்தமும் பார்க்க ஜோதிடரை அணுகவும்.</p>
+      <p class="disclaimer">* இது தார பலம் அடிப்படையிலான ஒரு எளிய குறிப்பு மட்டுமே.</p>
     </div>
   </section>
 
-  <!-- FESTIVALS -->
   <section id="pandigai" class="section">
     <div class="wrap">
       <p class="section-eyebrow">05 · நாட்காட்டி</p>
@@ -227,7 +220,6 @@
     </div>
   </section>
 
-  <!-- MUHURTHAM -->
   <section id="muhurtham" class="section alt">
     <div class="wrap">
       <p class="section-eyebrow">06 · நல்ல நாட்கள்</p>
@@ -236,7 +228,6 @@
     </div>
   </section>
 
-  <!-- FAQ (matches FAQPage schema in head) -->
   <section id="faq" class="section">
     <div class="wrap">
       <p class="section-eyebrow">07 · கேள்வி பதில்</p>
@@ -244,11 +235,11 @@
       <div class="faq-list">
         <details class="faq-item">
           <summary>இன்றைய ராகு காலம் என்ன?</summary>
-          <p>ராகு காலம் ஒவ்வொரு நாளும் மாறுபடும், அது வாரத்தின் நாள் மற்றும் சூரிய உதய-அஸ்தமன நேரத்தைப் பொறுத்து கணக்கிடப்படுகிறது. உங்கள் ஊருக்கான துல்லியமான ராகு காலத்தை இந்த பக்கத்தின் மேலே "பஞ்சாங்கம்" பகுதியில் காணலாம்.</p>
+          <p>ராகு காலம் ஒவ்வொரு நாளும் மாறுபடும், அது வாரத்தின் நாள் மற்றும் சூரிய உதய-அஸ்தமன நேரத்தைப் பொறுத்து கணக்கிடப்படுகிறது.</p>
         </details>
         <details class="faq-item">
           <summary>இன்றைய நட்சத்திரம் மற்றும் திதி எப்படி அறிவது?</summary>
-          <p>சந்திரன் மற்றும் சூரியனின் நிலைமானத்தை வைத்து திதி மற்றும் நட்சத்திரம் கணக்கிடப்படுகிறது. இந்த பஞ்சாங்கப் பக்கத்தில் இன்றைய தேதிக்கான திதி, நட்சத்திரம் தானாக காண்பிக்கப்படும்.</p>
+          <p>சந்திரன் மற்றும் சூரியனின் நிலைமானத்தை வைத்து திதி மற்றும் நட்சத்திரம் கணக்கிடப்படுகிறது.</p>
         </details>
         <details class="faq-item">
           <summary>நட்சத்திர பொருத்தம் எப்படி பார்ப்பது?</summary>
@@ -256,7 +247,7 @@
         </details>
         <details class="faq-item">
           <summary>ஜாதகம் எப்படி கணக்கிடப்படுகிறது?</summary>
-          <p>பிறந்த தேதி, நேரம், இடத்தை வைத்து சூரிய ராசி, சந்திர ராசி, ஜென்ம நட்சத்திரம் மற்றும் கிரக நிலைகள் கணக்கிடப்படுகின்றன். "ஜாதகம்" பகுதியில் இதை இலவசமாக பயன்படுத்தலாம்.</p>
+          <p>பிறந்த தேதி, நேரம், இடத்தை வைத்து சூரிய ராசி, சந்திர ராசி, ஜென்ம நட்சத்திரம் மற்றும் கிரக நிலைகள் கணக்கிடப்படுகின்றன.</p>
         </details>
       </div>
     </div>
