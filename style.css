@@ -1,214 +1,85 @@
-/* ==========================================================================
-   கடல்நிலா பஞ்சாங்கம் — stylesheet
-   Palette: night-sky indigo + marigold gold + moonlight silver + wave coral
-   ========================================================================== */
-
-:root {
-  --bg-deep:      #0E1630;
-  --bg-panel:     #161F42;
-  --bg-panel-2:   #1C2652;
-  --gold:         #D9A62E;
-  --gold-soft:    #F0C868;
-  --silver:       #9FB4D9;
-  --ivory:        #F4EFE3;
-  --coral:        #E2703A;
-  --line:         rgba(159,180,217,0.18);
-  --shadow:       0 10px 30px rgba(0,0,0,0.35);
-  --radius:       14px;
-  --font-display: 'Catamaran', 'Noto Sans Tamil', sans-serif;
-  --font-body:    'Noto Sans Tamil', 'Catamaran', sans-serif;
-  --font-mono:    'JetBrains Mono', monospace;
+/* ==============================================
+   SEO: FAQ Section Styles
+   ============================================== */
+.faq-section {
+    padding: 0 16px 32px;
+    max-width: 1360px;
+    margin: 0 auto;
+    width: 100%;
 }
 
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-  margin: 0;
-  background: radial-gradient(ellipse at top, #182052 0%, var(--bg-deep) 55%, #090D1F 100%);
-  color: var(--ivory);
-  font-family: var(--font-body);
-  min-height: 100vh;
-  position: relative;
-  overflow-x: hidden;
+.faq-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
 }
 
-/* subtle animated stars/waves backdrop */
-.sky-wave {
-  position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.5;
-}
-.sky-wave svg { width: 100%; height: 100%; }
-
-.wrap { position: relative; z-index: 1; max-width: 1080px; margin: 0 auto; padding: 24px 18px 60px; }
-
-/* ---------- header ---------- */
-header.site-head {
-  display: flex; flex-direction: column; align-items: center; text-align: center;
-  padding: 18px 0 26px;
-}
-.moon-badge {
-  width: 64px; height: 64px; margin-bottom: 8px;
-}
-.site-title {
-  font-family: var(--font-display);
-  font-size: clamp(28px, 5vw, 42px);
-  font-weight: 800;
-  letter-spacing: 0.5px;
-  background: linear-gradient(90deg, var(--gold-soft), var(--gold));
-  -webkit-background-clip: text; background-clip: text; color: transparent;
-  margin: 0;
-}
-.site-sub {
-  color: var(--silver); font-size: 14px; margin-top: 4px; letter-spacing: 1.5px; text-transform: uppercase;
+.faq-heading {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--fg);
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--accent);
+    display: inline-block;
 }
 
-/* ---------- nav tabs ---------- */
-.tabs {
-  display: flex; justify-content: center; gap: 8px; margin: 18px 0 26px; flex-wrap: wrap;
-}
-.tab-btn {
-  font-family: var(--font-display); font-weight: 700; font-size: 15px;
-  background: var(--bg-panel); color: var(--silver); border: 1px solid var(--line);
-  padding: 10px 22px; border-radius: 999px; cursor: pointer; transition: all .2s ease;
-}
-.tab-btn:hover { border-color: var(--gold); color: var(--gold-soft); }
-.tab-btn.active {
-  background: linear-gradient(120deg, var(--gold), #B9821F); color: #1B1204; border-color: transparent;
-  box-shadow: 0 4px 14px rgba(217,166,46,0.35);
+.faq-item {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
 }
 
-/* ---------- location + date controls ---------- */
-.controls {
-  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px;
-  background: var(--bg-panel); border: 1px solid var(--line); border-radius: var(--radius);
-  padding: 12px 16px; margin-bottom: 22px;
-}
-.controls label { font-size: 13px; color: var(--silver); }
-.controls input, .controls select {
-  background: var(--bg-panel-2); border: 1px solid var(--line); color: var(--ivory);
-  border-radius: 8px; padding: 7px 10px; font-family: var(--font-body); font-size: 14px;
-}
-.controls button {
-  font-family: var(--font-display); font-weight: 700; background: var(--gold); color: #1B1204;
-  border: none; border-radius: 8px; padding: 8px 16px; cursor: pointer;
-}
-.controls button.ghost {
-  background: transparent; border: 1px solid var(--gold); color: var(--gold-soft);
+.faq-item:last-child {
+    border-bottom: none;
 }
 
-/* ---------- panels / cards ---------- */
-.panel {
-  background: var(--bg-panel); border: 1px solid var(--line); border-radius: var(--radius);
-  padding: 20px; margin-bottom: 20px; box-shadow: var(--shadow);
-}
-.panel h2 {
-  font-family: var(--font-display); color: var(--gold-soft); font-size: 18px; margin: 0 0 14px;
-  display: flex; align-items: center; gap: 8px;
-}
-.grid-cards {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px;
-}
-.info-card {
-  background: var(--bg-panel-2); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px;
-}
-.info-card .label { font-size: 12px; color: var(--silver); text-transform: uppercase; letter-spacing: 0.5px; }
-.info-card .value { font-family: var(--font-display); font-weight: 700; font-size: 17px; color: var(--ivory); margin-top: 4px; }
-.info-card .value.mono { font-family: var(--font-mono); font-size: 15px; }
-
-/* ---------- daily hero card ---------- */
-.hero-day {
-  display: flex; flex-wrap: wrap; gap: 24px; align-items: center; justify-content: space-between;
-}
-.hero-date {
-  font-family: var(--font-mono); color: var(--silver); font-size: 14px;
-}
-.hero-tithi {
-  font-family: var(--font-display); font-size: clamp(22px, 4vw, 30px); font-weight: 800; color: var(--gold-soft);
-}
-.hero-moon {
-  width: 78px; height: 78px; flex-shrink: 0;
+.faq-question {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--fg);
+    margin-bottom: 8px;
+    line-height: 1.4;
 }
 
-/* ---------- period rows (rahu/yama/kuligai/nalla neram) ---------- */
-.period-row {
-  display: flex; align-items: center; justify-content: space-between; gap: 10px;
-  padding: 10px 14px; border-radius: 10px; background: var(--bg-panel-2); margin-bottom: 8px;
-  border-left: 4px solid var(--coral);
-}
-.period-row.good { border-left-color: #4FAE7B; }
-.period-row .name { font-weight: 700; font-family: var(--font-display); font-size: 14px; }
-.period-row .time { font-family: var(--font-mono); color: var(--silver); font-size: 14px; }
-
-/* ---------- special occasions badges ---------- */
-.occasion-badge {
-  display: inline-flex; align-items: center; gap: 6px; background: rgba(226,112,58,0.16);
-  border: 1px solid var(--coral); color: var(--gold-soft); border-radius: 999px;
-  padding: 5px 12px; font-size: 13px; font-weight: 700; margin: 3px 4px 3px 0;
+.faq-answer {
+    font-size: 0.82rem;
+    font-weight: 400;
+    color: var(--muted);
+    line-height: 1.7;
 }
 
-/* ---------- monthly calendar ---------- */
-.cal-nav { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 14px; }
-.cal-nav button {
-  background: var(--bg-panel-2); border: 1px solid var(--line); color: var(--gold-soft);
-  border-radius: 8px; padding: 6px 14px; cursor: pointer; font-size: 16px;
-}
-.cal-nav .cal-title { font-family: var(--font-display); font-size: 20px; color: var(--gold-soft); min-width: 200px; text-align: center; }
-
-.cal-grid {
-  display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px;
-}
-.cal-weekday {
-  text-align: center; font-size: 12px; color: var(--silver); padding: 6px 0; font-weight: 700;
-}
-.cal-cell {
-  background: var(--bg-panel-2); border: 1px solid var(--line); border-radius: 8px;
-  min-height: 76px; padding: 6px; cursor: pointer; transition: border-color .15s ease; position: relative;
-}
-.cal-cell:hover { border-color: var(--gold); }
-.cal-cell.empty { background: transparent; border: none; cursor: default; }
-.cal-cell.today { border-color: var(--gold); box-shadow: 0 0 0 1px var(--gold) inset; }
-.cal-cell .d-num { font-family: var(--font-mono); font-size: 13px; color: var(--silver); }
-.cal-cell .d-tithi { font-size: 11px; color: var(--ivory); margin-top: 4px; line-height: 1.25; }
-.cal-cell .d-badges { position: absolute; bottom: 4px; left: 4px; right: 4px; display: flex; flex-wrap: wrap; gap: 2px; }
-.cal-cell .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--coral); }
-
-/* ---------- yearly list ---------- */
-.year-controls { display:flex; gap:10px; align-items:center; justify-content:center; margin-bottom: 16px; }
-.year-groups { display: grid; gap: 16px; }
-.year-group h3 {
-  font-family: var(--font-display); color: var(--gold-soft); font-size: 16px; margin: 0 0 8px;
-  border-bottom: 1px dashed var(--line); padding-bottom: 6px;
-}
-.year-item {
-  display: flex; justify-content: space-between; gap: 10px; padding: 8px 4px; font-size: 14px;
-  border-bottom: 1px solid var(--line);
-}
-.year-item .yi-date { color: var(--ivory); font-weight: 600; }
-.year-item .yi-time { color: var(--silver); font-family: var(--font-mono); font-size: 13px; text-align: right; }
-
-/* ---------- modal (day detail from calendar) ---------- */
-.modal-backdrop {
-  position: fixed; inset: 0; background: rgba(9,13,31,0.72); display: none;
-  align-items: center; justify-content: center; z-index: 50; padding: 16px;
-}
-.modal-backdrop.open { display: flex; }
-.modal-box {
-  background: var(--bg-panel); border: 1px solid var(--line); border-radius: var(--radius);
-  max-width: 480px; width: 100%; padding: 20px; max-height: 85vh; overflow-y: auto; box-shadow: var(--shadow);
-}
-.modal-box .close-btn {
-  float: right; background: none; border: none; color: var(--silver); font-size: 20px; cursor: pointer;
+.faq-answer strong {
+    color: var(--accent);
+    font-weight: 700;
 }
 
-footer.site-foot {
-  text-align: center; color: var(--silver); font-size: 13px; margin-top: 30px; padding-top: 18px;
-  border-top: 1px solid var(--line);
-}
-.disclaimer {
-  font-size: 12px; color: var(--silver); opacity: 0.8; margin-top: 10px; text-align: center; line-height: 1.6;
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }
 
-@media (max-width: 640px) {
-  .cal-cell { min-height: 62px; }
-  .cal-cell .d-tithi { display: none; }
-  .hero-day { flex-direction: column; align-items: flex-start; }
+@media (min-width: 640px) {
+    .faq-section { padding: 0 24px 40px; }
+    .faq-heading { font-size: 1.3rem; }
+    .faq-question { font-size: 0.95rem; }
+    .faq-answer { font-size: 0.85rem; }
+}
+
+@media (min-width: 1024px) {
+    .faq-section { padding: 0 40px 48px; }
+    .faq-heading { font-size: 1.4rem; margin-bottom: 20px; }
+    .faq-item { padding: 20px 0; }
+    .faq-question { font-size: 1.05rem; margin-bottom: 10px; }
+    .faq-answer { font-size: 0.9rem; }
+}
+
+@media (min-width: 1400px) {
+    .faq-section { padding: 0 60px 56px; }
 }
