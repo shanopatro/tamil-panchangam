@@ -6,5 +6,16 @@
   "background_color": "#FBF3E1",
   "theme_color": "#8c2f22",
   "lang": "ta",
-  "icons": []
+  "icons": [
+    {
+      "src": "icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
 }
