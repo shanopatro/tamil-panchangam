@@ -1,195 +1,214 @@
-/* ============ TOKENS ============ */
-:root{
-  --bg: #FBF3E1;
-  --bg-alt: #F3E7C9;
-  --ink: #2C1B10;
-  --ink-soft: #5B4636;
-  --vermilion: #8C2F22;
-  --vermilion-deep: #6E2118;
-  --turmeric: #C98A1F;
-  --indigo: #1F3557;
-  --line: #C9AE7D;
-  --card: #FFFBF2;
-  --shadow: 0 10px 30px rgba(44,27,16,0.12);
-  --radius: 14px;
+/* ==========================================================================
+   கடல்நிலா பஞ்சாங்கம் — stylesheet
+   Palette: night-sky indigo + marigold gold + moonlight silver + wave coral
+   ========================================================================== */
+
+:root {
+  --bg-deep:      #0E1630;
+  --bg-panel:     #161F42;
+  --bg-panel-2:   #1C2652;
+  --gold:         #D9A62E;
+  --gold-soft:    #F0C868;
+  --silver:       #9FB4D9;
+  --ivory:        #F4EFE3;
+  --coral:        #E2703A;
+  --line:         rgba(159,180,217,0.18);
+  --shadow:       0 10px 30px rgba(0,0,0,0.35);
+  --radius:       14px;
   --font-display: 'Catamaran', 'Noto Sans Tamil', sans-serif;
-  --font-body: 'Noto Sans Tamil', 'Martel', serif;
-  --font-data: 'Martel', 'Noto Sans Tamil', serif;
+  --font-body:    'Noto Sans Tamil', 'Catamaran', sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
 }
 
-*{box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--ink);
-  font-family:var(--font-body);
-  line-height:1.6;
-  background-image:
-    radial-gradient(circle at 10% 0%, rgba(201,138,31,0.08), transparent 40%),
-    radial-gradient(circle at 90% 10%, rgba(140,47,34,0.06), transparent 35%);
-}
-.wrap{max-width:1100px;margin:0 auto;padding:0 22px;}
-a{color:inherit;text-decoration:none;}
-h1,h2,h3{font-family:var(--font-display);color:var(--vermilion-deep);margin:0 0 8px;}
-.hidden{display:none !important;}
-
-/* thread decoration - signature element strip at top */
-.thread-deco{
-  height:6px;
-  background:repeating-linear-gradient(90deg,var(--turmeric) 0 22px, var(--vermilion) 22px 44px, var(--indigo) 44px 66px);
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: radial-gradient(ellipse at top, #182052 0%, var(--bg-deep) 55%, #090D1F 100%);
+  color: var(--ivory);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
 }
 
-/* ============ HEADER ============ */
-.site-header{
-  background:var(--ink);
-  color:var(--bg);
-  position:sticky;top:0;z-index:50;
-  border-bottom:3px solid var(--turmeric);
+/* subtle animated stars/waves backdrop */
+.sky-wave {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.5;
 }
-.header-row{display:flex;align-items:center;justify-content:space-between;padding:14px 22px;gap:16px;}
-.brand{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:900;font-size:1.25rem;color:var(--bg);}
-.brand-mark{color:var(--turmeric);font-size:1.4rem;}
-.main-nav{display:flex;gap:22px;flex-wrap:wrap;}
-.main-nav a{font-weight:600;font-size:0.95rem;opacity:0.9;padding:6px 2px;border-bottom:2px solid transparent;transition:.2s;}
-.main-nav a:hover{border-color:var(--turmeric);opacity:1;}
-.nav-toggle{display:none;background:none;border:none;color:var(--bg);font-size:1.4rem;cursor:pointer;}
+.sky-wave svg { width: 100%; height: 100%; }
 
-/* ============ HERO ============ */
-.hero{padding:56px 0 40px;}
-.hero-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:40px;align-items:center;}
-.eyebrow{font-family:var(--font-data);text-transform:uppercase;letter-spacing:2px;color:var(--turmeric);font-weight:700;font-size:.8rem;margin:0 0 6px;}
-.hero-copy h1{font-size:2.4rem;line-height:1.15;}
-.hero-sub{color:var(--ink-soft);margin:4px 0 20px;font-size:1.05rem;}
-.hero-chips{display:flex;flex-wrap:wrap;gap:10px;}
-.chip{background:var(--card);border:1px solid var(--line);border-radius:30px;padding:8px 16px;font-size:.9rem;box-shadow:var(--shadow);}
-.chip.accent{background:var(--vermilion);color:#fff;border-color:var(--vermilion-deep);}
-.chip b{font-family:var(--font-data);}
+.wrap { position: relative; z-index: 1; max-width: 1080px; margin: 0 auto; padding: 24px 18px 60px; }
 
-/* Signature element: Ola-leaf card */
-.ola-leaf{
-  position:relative;
-  background:linear-gradient(180deg,#EFDDAE,#E5CE93);
-  border-radius:60px/22px;
-  padding:34px 40px;
-  box-shadow:var(--shadow), inset 0 0 0 1px rgba(140,47,34,0.15);
-  border:2px solid var(--vermilion-deep);
+/* ---------- header ---------- */
+header.site-head {
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  padding: 18px 0 26px;
 }
-.ola-leaf::before, .ola-leaf::after{
-  content:"";position:absolute;top:-8px;bottom:-8px;width:16px;
-  background:repeating-linear-gradient(0deg,var(--vermilion) 0 6px, var(--turmeric) 6px 12px);
-  border-radius:8px;
+.moon-badge {
+  width: 64px; height: 64px; margin-bottom: 8px;
 }
-.ola-leaf::before{left:-8px;}
-.ola-leaf::after{right:-8px;}
-.ola-hole{position:absolute;top:50%;transform:translateY(-50%);width:14px;height:14px;border-radius:50%;background:var(--bg);border:2px solid var(--vermilion-deep);}
-.ola-hole-left{left:20px;}
-.ola-hole-right{right:20px;}
-.ola-content{display:flex;flex-direction:column;gap:9px;}
-.ola-row{display:flex;justify-content:space-between;border-bottom:1px dashed rgba(44,27,16,0.25);padding-bottom:6px;font-family:var(--font-data);}
-.ola-row span{color:var(--ink-soft);}
-.ola-row b{color:var(--vermilion-deep);}
-
-/* ============ LOCATION BAR ============ */
-.location-bar{background:var(--indigo);color:#fff;padding:14px 0;}
-.location-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;}
-.location-row label{font-size:.9rem;opacity:.85;}
-.location-row select, .location-row input{
-  background:#fff;border:none;border-radius:8px;padding:8px 12px;font-family:var(--font-body);font-size:.9rem;
+.site-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  background: linear-gradient(90deg, var(--gold-soft), var(--gold));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  margin: 0;
 }
-.btn-small{background:var(--turmeric);border:none;color:var(--ink);font-weight:700;padding:9px 18px;border-radius:8px;cursor:pointer;}
-.btn-small:hover{background:#dba13a;}
-
-/* ============ SECTIONS ============ */
-.section{padding:64px 0;}
-.section.alt{background:var(--bg-alt);}
-.section-eyebrow{font-family:var(--font-data);color:var(--turmeric);font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:.8rem;margin-bottom:6px;}
-.section-title{font-size:1.9rem;margin-bottom:14px;}
-.section-desc{color:var(--ink-soft);max-width:640px;margin-bottom:26px;}
-
-/* Panchangam grid */
-.panch-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:24px;}
-.panch-grid .pcard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow);}
-.pcard .pk{font-size:.78rem;color:var(--ink-soft);text-transform:uppercase;letter-spacing:1px;}
-.pcard .pv{font-family:var(--font-data);font-size:1.15rem;color:var(--vermilion-deep);font-weight:700;margin-top:4px;}
-
-.kalam-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;}
-.kcard{background:var(--indigo);color:#fff;border-radius:var(--radius);padding:16px 18px;}
-.kcard .pk{opacity:.75;font-size:.78rem;text-transform:uppercase;letter-spacing:1px;}
-.kcard .pv{font-family:var(--font-data);font-size:1.1rem;font-weight:700;margin-top:4px;color:#F3E7C9;}
-
-.disclaimer{font-size:.82rem;color:var(--ink-soft);margin-top:20px;font-style:italic;}
-
-/* Jathagam form */
-.jform{display:flex;flex-wrap:wrap;gap:16px;align-items:end;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);}
-.jfield{display:flex;flex-direction:column;gap:6px;}
-.jfield label{font-size:.85rem;color:var(--ink-soft);font-weight:600;}
-.jfield input, .jfield select{padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-family:var(--font-body);font-size:.95rem;}
-.btn-primary{background:var(--vermilion);color:#fff;border:none;padding:12px 26px;border-radius:8px;font-weight:700;cursor:pointer;font-size:.95rem;}
-.btn-primary:hover{background:var(--vermilion-deep);}
-
-.jathagam-result{margin-top:26px;}
-.jr-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:20px;}
-.jr-summary .jcard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);}
-.jr-summary .jk{font-size:.78rem;color:var(--ink-soft);text-transform:uppercase;}
-.jr-summary .jv{font-family:var(--font-data);font-weight:700;color:var(--vermilion-deep);font-size:1.1rem;}
-
-.graha-table-wrap{overflow-x:auto;}
-.graha-table{width:100%;border-collapse:collapse;background:var(--card);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);}
-.graha-table th, .graha-table td{padding:12px 16px;text-align:left;border-bottom:1px solid var(--line);}
-.graha-table th{background:var(--vermilion-deep);color:#fff;font-family:var(--font-display);}
-.graha-table tr:last-child td{border-bottom:none;}
-
-/* Rasi grid */
-.rasi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;}
-.rasi-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);}
-.rasi-card h3{font-size:1.1rem;margin-bottom:6px;}
-.rasi-card p{font-size:.9rem;color:var(--ink-soft);margin:0;}
-
-/* Porutham */
-.porutham-form{display:flex;flex-wrap:wrap;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);}
-.porutham-form select{padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-family:var(--font-body);}
-.vs{font-weight:900;color:var(--turmeric);}
-.porutham-result{margin-top:20px;background:var(--card);border-left:5px solid var(--vermilion);border-radius:8px;padding:18px 22px;box-shadow:var(--shadow);}
-.porutham-result h3{margin-bottom:8px;}
-
-/* Festival & Muhurtham lists */
-.fest-list, .muhurtham-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;}
-.fest-item, .muh-item{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--turmeric);border-radius:10px;padding:14px 18px;box-shadow:var(--shadow);}
-.fest-item .fdate, .muh-item .mdate{font-family:var(--font-data);font-weight:700;color:var(--vermilion-deep);font-size:.9rem;}
-.fest-item .fname, .muh-item .mname{margin-top:4px;font-size:1rem;}
-.muh-item{border-left-color:var(--indigo);}
-
-/* FAQ */
-.faq-list{display:flex;flex-direction:column;gap:10px;max-width:760px;}
-.faq-item{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 18px;box-shadow:var(--shadow);}
-.faq-item summary{cursor:pointer;font-weight:700;font-family:var(--font-display);color:var(--vermilion-deep);}
-.faq-item p{margin:10px 0 0;color:var(--ink-soft);font-size:.95rem;}
-
-/* Footer */
-.site-footer{background:var(--ink);color:var(--bg-alt);text-align:center;padding:26px 0;font-size:.85rem;}
-
-/* ============ RESPONSIVE ============ */
-@media (max-width:820px){
-  .hero-grid{grid-template-columns:1fr;}
-  .main-nav{
-    position:absolute;top:100%;left:0;right:0;background:var(--ink);
-    flex-direction:column;padding:14px 22px;gap:14px;display:none;
-  }
-  .main-nav.open{display:flex;}
-  .nav-toggle{display:block;}
-}
-@media (max-width:480px){
-  .hero-copy h1{font-size:1.7rem;}
-  .ola-leaf{padding:26px 22px;}
+.site-sub {
+  color: var(--silver); font-size: 14px; margin-top: 4px; letter-spacing: 1.5px; text-transform: uppercase;
 }
 
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce){
-  html{scroll-behavior:auto;}
+/* ---------- nav tabs ---------- */
+.tabs {
+  display: flex; justify-content: center; gap: 8px; margin: 18px 0 26px; flex-wrap: wrap;
+}
+.tab-btn {
+  font-family: var(--font-display); font-weight: 700; font-size: 15px;
+  background: var(--bg-panel); color: var(--silver); border: 1px solid var(--line);
+  padding: 10px 22px; border-radius: 999px; cursor: pointer; transition: all .2s ease;
+}
+.tab-btn:hover { border-color: var(--gold); color: var(--gold-soft); }
+.tab-btn.active {
+  background: linear-gradient(120deg, var(--gold), #B9821F); color: #1B1204; border-color: transparent;
+  box-shadow: 0 4px 14px rgba(217,166,46,0.35);
 }
 
-/* Keyboard focus visibility */
-a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible{
-  outline:3px solid var(--turmeric);outline-offset:2px;
+/* ---------- location + date controls ---------- */
+.controls {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px;
+  background: var(--bg-panel); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 12px 16px; margin-bottom: 22px;
+}
+.controls label { font-size: 13px; color: var(--silver); }
+.controls input, .controls select {
+  background: var(--bg-panel-2); border: 1px solid var(--line); color: var(--ivory);
+  border-radius: 8px; padding: 7px 10px; font-family: var(--font-body); font-size: 14px;
+}
+.controls button {
+  font-family: var(--font-display); font-weight: 700; background: var(--gold); color: #1B1204;
+  border: none; border-radius: 8px; padding: 8px 16px; cursor: pointer;
+}
+.controls button.ghost {
+  background: transparent; border: 1px solid var(--gold); color: var(--gold-soft);
+}
+
+/* ---------- panels / cards ---------- */
+.panel {
+  background: var(--bg-panel); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 20px; margin-bottom: 20px; box-shadow: var(--shadow);
+}
+.panel h2 {
+  font-family: var(--font-display); color: var(--gold-soft); font-size: 18px; margin: 0 0 14px;
+  display: flex; align-items: center; gap: 8px;
+}
+.grid-cards {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px;
+}
+.info-card {
+  background: var(--bg-panel-2); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px;
+}
+.info-card .label { font-size: 12px; color: var(--silver); text-transform: uppercase; letter-spacing: 0.5px; }
+.info-card .value { font-family: var(--font-display); font-weight: 700; font-size: 17px; color: var(--ivory); margin-top: 4px; }
+.info-card .value.mono { font-family: var(--font-mono); font-size: 15px; }
+
+/* ---------- daily hero card ---------- */
+.hero-day {
+  display: flex; flex-wrap: wrap; gap: 24px; align-items: center; justify-content: space-between;
+}
+.hero-date {
+  font-family: var(--font-mono); color: var(--silver); font-size: 14px;
+}
+.hero-tithi {
+  font-family: var(--font-display); font-size: clamp(22px, 4vw, 30px); font-weight: 800; color: var(--gold-soft);
+}
+.hero-moon {
+  width: 78px; height: 78px; flex-shrink: 0;
+}
+
+/* ---------- period rows (rahu/yama/kuligai/nalla neram) ---------- */
+.period-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  padding: 10px 14px; border-radius: 10px; background: var(--bg-panel-2); margin-bottom: 8px;
+  border-left: 4px solid var(--coral);
+}
+.period-row.good { border-left-color: #4FAE7B; }
+.period-row .name { font-weight: 700; font-family: var(--font-display); font-size: 14px; }
+.period-row .time { font-family: var(--font-mono); color: var(--silver); font-size: 14px; }
+
+/* ---------- special occasions badges ---------- */
+.occasion-badge {
+  display: inline-flex; align-items: center; gap: 6px; background: rgba(226,112,58,0.16);
+  border: 1px solid var(--coral); color: var(--gold-soft); border-radius: 999px;
+  padding: 5px 12px; font-size: 13px; font-weight: 700; margin: 3px 4px 3px 0;
+}
+
+/* ---------- monthly calendar ---------- */
+.cal-nav { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 14px; }
+.cal-nav button {
+  background: var(--bg-panel-2); border: 1px solid var(--line); color: var(--gold-soft);
+  border-radius: 8px; padding: 6px 14px; cursor: pointer; font-size: 16px;
+}
+.cal-nav .cal-title { font-family: var(--font-display); font-size: 20px; color: var(--gold-soft); min-width: 200px; text-align: center; }
+
+.cal-grid {
+  display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px;
+}
+.cal-weekday {
+  text-align: center; font-size: 12px; color: var(--silver); padding: 6px 0; font-weight: 700;
+}
+.cal-cell {
+  background: var(--bg-panel-2); border: 1px solid var(--line); border-radius: 8px;
+  min-height: 76px; padding: 6px; cursor: pointer; transition: border-color .15s ease; position: relative;
+}
+.cal-cell:hover { border-color: var(--gold); }
+.cal-cell.empty { background: transparent; border: none; cursor: default; }
+.cal-cell.today { border-color: var(--gold); box-shadow: 0 0 0 1px var(--gold) inset; }
+.cal-cell .d-num { font-family: var(--font-mono); font-size: 13px; color: var(--silver); }
+.cal-cell .d-tithi { font-size: 11px; color: var(--ivory); margin-top: 4px; line-height: 1.25; }
+.cal-cell .d-badges { position: absolute; bottom: 4px; left: 4px; right: 4px; display: flex; flex-wrap: wrap; gap: 2px; }
+.cal-cell .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--coral); }
+
+/* ---------- yearly list ---------- */
+.year-controls { display:flex; gap:10px; align-items:center; justify-content:center; margin-bottom: 16px; }
+.year-groups { display: grid; gap: 16px; }
+.year-group h3 {
+  font-family: var(--font-display); color: var(--gold-soft); font-size: 16px; margin: 0 0 8px;
+  border-bottom: 1px dashed var(--line); padding-bottom: 6px;
+}
+.year-item {
+  display: flex; justify-content: space-between; gap: 10px; padding: 8px 4px; font-size: 14px;
+  border-bottom: 1px solid var(--line);
+}
+.year-item .yi-date { color: var(--ivory); font-weight: 600; }
+.year-item .yi-time { color: var(--silver); font-family: var(--font-mono); font-size: 13px; text-align: right; }
+
+/* ---------- modal (day detail from calendar) ---------- */
+.modal-backdrop {
+  position: fixed; inset: 0; background: rgba(9,13,31,0.72); display: none;
+  align-items: center; justify-content: center; z-index: 50; padding: 16px;
+}
+.modal-backdrop.open { display: flex; }
+.modal-box {
+  background: var(--bg-panel); border: 1px solid var(--line); border-radius: var(--radius);
+  max-width: 480px; width: 100%; padding: 20px; max-height: 85vh; overflow-y: auto; box-shadow: var(--shadow);
+}
+.modal-box .close-btn {
+  float: right; background: none; border: none; color: var(--silver); font-size: 20px; cursor: pointer;
+}
+
+footer.site-foot {
+  text-align: center; color: var(--silver); font-size: 13px; margin-top: 30px; padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+.disclaimer {
+  font-size: 12px; color: var(--silver); opacity: 0.8; margin-top: 10px; text-align: center; line-height: 1.6;
+}
+
+@media (max-width: 640px) {
+  .cal-cell { min-height: 62px; }
+  .cal-cell .d-tithi { display: none; }
+  .hero-day { flex-direction: column; align-items: flex-start; }
 }
