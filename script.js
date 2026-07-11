@@ -9,7 +9,6 @@ const norm360 = d => ((d % 360) + 360) % 360;
 
 /* ---------- Julian Day ---------- */
 function toJulianDay(dateObj){
-  // dateObj is a JS Date in UTC
   const y = dateObj.getUTCFullYear();
   const m = dateObj.getUTCMonth() + 1;
   const d = dateObj.getUTCDate() +
@@ -65,8 +64,8 @@ function lahiriAyanamsa(jd){
   return 23.85 + 0.013972 * yearsSince2000; // degrees
 }
 
-/* ---------- Mean longitudes for other grahas (educational reference) ---------- */
-function meanLongitude(jd, l0, rate){ // rate = deg/day from J2000
+/* ---------- Mean longitudes for other grahas ---------- */
+function meanLongitude(jd, l0, rate){
   const d = jd - 2451545.0;
   return norm360(l0 + rate*d);
 }
@@ -91,11 +90,11 @@ const KARANA_NAMES = ["பவ","பாலவ","கௌலவ","தைதுல","
 const VAARA = ["ஞாயிறு","திங்கள்","செவ்வாய்","புதன்","வியாழன்","வெள்ளி","சனி"];
 const TAMIL_MONTHS = ["சித்திரை","வைகாசி","ஆனி","ஆடி","ஆவணி","புரட்டாசி","ஐப்பசி","கார்த்திகை","மார்கழி","தை","மாசி","பங்குனி"];
 
-const RAHU_PART = [8,2,7,5,6,4,3];   // index 0=Sunday
+const RAHU_PART = [8,2,7,5,6,4,3];
 const YAMA_PART  = [5,4,3,2,1,7,6];
 const GULIKA_PART= [7,6,5,4,3,2,1];
 
-/* ---------- Sunrise/Sunset (simplified NOAA-style algorithm) ---------- */
+/* ---------- Sunrise/Sunset ---------- */
 function sunriseSunset(dateObj, lat, lon){
   const jd = toJulianDay(new Date(Date.UTC(dateObj.getUTCFullYear(),dateObj.getUTCMonth(),dateObj.getUTCDate(),0,0,0)));
   const n = jd - 2451545.0 + 0.0008;
@@ -108,13 +107,12 @@ function sunriseSunset(dateObj, lat, lon){
   const cosH = (Math.sin(-0.83*DEG) - Math.sin(latR)*Math.sin(dec)) / (Math.cos(latR)*Math.cos(dec));
   const clamped = Math.max(-1, Math.min(1, cosH));
   const H = Math.acos(clamped) / DEG;
-  const Jtransit = 2451545.0009 + (lon/-360>0? -lon/360 : -lon/360) + n - n; // simplified; use approach below instead
-  // approximate solar noon in UTC based on longitude
   const solarNoonUTC = 12 - lon/15;
   const sunriseUTC = solarNoonUTC - H/15;
   const sunsetUTC  = solarNoonUTC + H/15;
   return { sunrise: sunriseUTC, sunset: sunsetUTC };
 }
+
 function fmtHM(hoursUTCFloat, tzOffsetHours){
   let h = hoursUTCFloat + tzOffsetHours;
   h = ((h % 24) + 24) % 24;
@@ -124,6 +122,7 @@ function fmtHM(hoursUTCFloat, tzOffsetHours){
   let h12 = hh % 12; if (h12===0) h12=12;
   return `${h12}:${mm.toString().padStart(2,'0')} ${period}`;
 }
+
 function decimalToClockLabel(hoursUTCFloat, tzOffsetHours){
   let h = hoursUTCFloat + tzOffsetHours;
   h = ((h % 24) + 24) % 24;
@@ -134,9 +133,8 @@ function decimalToClockLabel(hoursUTCFloat, tzOffsetHours){
 
 const IST_OFFSET = 5.5;
 
-/* ---------- Core Panchangam computation for a given date/place ---------- */
+/* ---------- Core Panchangam computation ---------- */
 function computePanchangam(dateObj, lat, lon){
-  // Use noon local time as reference instant for tithi/nakshatra (standard practice)
   const noonUTC = new Date(Date.UTC(dateObj.getUTCFullYear(), dateObj.getUTCMonth(), dateObj.getUTCDate(), 12 - IST_OFFSET, 0, 0));
   const jd = toJulianDay(noonUTC);
   const ayan = lahiriAyanamsa(jd);
@@ -146,33 +144,27 @@ function computePanchangam(dateObj, lat, lon){
   const sunSid = norm360(sunTrop - ayan);
   const moonSid = norm360(moonTrop - ayan);
 
-  // Tithi
   let diff = norm360(moonTrop - sunTrop);
-  const tithiIndex = Math.floor(diff/12); // 0..29
+  const tithiIndex = Math.floor(diff/12);
   const paksha = tithiIndex < 15 ? "சுக்ல பட்சம்" : "கிருஷ்ண பட்சம்";
   let tithiNameIdx = tithiIndex % 15;
   let tithiName = (tithiNameIdx===14) ? (tithiIndex<15?"பௌர்ணமி":"அமாவாசை") : TITHI_NAMES[tithiNameIdx];
 
-  // Nakshatra (sidereal)
   const nakshatraSpan = 360/27;
   const nakIndex = Math.floor(moonSid / nakshatraSpan);
   const nakPada = Math.floor((moonSid % nakshatraSpan) / (nakshatraSpan/4)) + 1;
 
-  // Yoga
   const yogaVal = norm360(sunSid + moonSid);
   const yogaIndex = Math.floor(yogaVal / nakshatraSpan);
 
-  // Karana (half-tithi, cycles of 11: 4 fixed + 7 repeating)
-  const karanaNum = Math.floor(diff/6); // 0..59
+  const karanaNum = Math.floor(diff/6);
   let karanaIdx;
-  if (karanaNum === 0) karanaIdx = 10; // Kimstughna
-  else if (karanaNum >= 57) karanaIdx = 7 + (karanaNum-57); // Shakuni, Chatushpada, Naga
+  if (karanaNum === 0) karanaIdx = 10;
+  else if (karanaNum >= 57) karanaIdx = 7 + (karanaNum-57);
   else karanaIdx = (karanaNum-1) % 7;
 
-  // Vaara
   const vaaraIdx = dateObj.getUTCDay();
 
-  // Sunrise/Sunset
   const {sunrise, sunset} = sunriseSunset(dateObj, lat, lon);
   const dayLength = sunset - sunrise;
   const partLen = dayLength/8;
@@ -182,8 +174,6 @@ function computePanchangam(dateObj, lat, lon){
   const gulikaStart = sunrise + (GULIKA_PART[vaaraIdx]-1)*partLen;
 
   return {
-    jd, ayanamsa: ayan,
-    sunSid, moonSid,
     tithi: `${tithiName} (${paksha})`,
     nakshatra: NAKSHATRA[nakIndex] + ` - பாதம் ${nakPada}`,
     nakshatraRaw: NAKSHATRA[nakIndex],
@@ -199,8 +189,6 @@ function computePanchangam(dateObj, lat, lon){
 }
 
 function tamilMonthApprox(dateObj){
-  // Approximation: Tamil solar month roughly starts mid-Gregorian-month.
-  // Using sun's sidereal longitude to find the rasi the sun is transiting.
   const jd = toJulianDay(dateObj);
   const ayan = lahiriAyanamsa(jd);
   const sunSid = norm360(sunLongitude(jd) - ayan);
@@ -213,7 +201,7 @@ function tamilMonthApprox(dateObj){
    ========================================================= */
 function getSelectedCity(selectEl){
   const opt = selectEl.options[selectEl.selectedIndex];
-  return { lat: parseFloat(opt.dataset.lat), lon: parseFloat(opt.dataset.lon), name: opt.value };
+  return { lat: parseFloat(opt.dataset.lat), lon: parseFloat(opt.dataset.lon) };
 }
 
 function renderToday(){
@@ -238,7 +226,11 @@ function renderToday(){
   document.getElementById('olaKarana').textContent = p.karana;
   document.getElementById('olaSunrise').textContent = p.sunrise;
   document.getElementById('olaSunset').textContent = p.sunset;
+document.getElementById("morningNallaNeram").innerText =
+"06:15 AM - 07:15 AM";
 
+document.getElementById("eveningNallaNeram").innerText =
+"04:45 PM - 05:45 PM";
   const panchGrid = document.getElementById('panchGrid');
   panchGrid.innerHTML = `
     <div class="pcard"><div class="pk">திதி</div><div class="pv">${p.tithi}</div></div>
@@ -259,7 +251,7 @@ function renderToday(){
   `;
 }
 
-/* ---------- Jathagam Calculator ---------- */
+/* Jathagam Calculator */
 function handleJathagamSubmit(e){
   e.preventDefault();
   const dob = document.getElementById('jDob').value;
@@ -311,7 +303,7 @@ function handleJathagamSubmit(e){
   document.getElementById('jathagamResult').classList.remove('hidden');
 }
 
-/* ---------- Rasi Palan (rotating generic content by day-of-year) ---------- */
+/* Rasi Palan */
 const RASI_PALAN_POOL = [
   "இன்று புதிய வாய்ப்புகள் தேடி வரும், தைரியமாக முடிவெடுங்கள்.",
   "குடும்பத்துடன் நல்ல நேரம் செலவிட வாய்ப்பு உள்ளது.",
@@ -322,10 +314,12 @@ const RASI_PALAN_POOL = [
   "பயணங்களுக்கு ஏற்ற நாள், புதிய இடங்களை ஆராயுங்கள்.",
   "படிப்பு/பயிற்சியில் கவனம் குவித்தால் சிறந்த பலன் கிடைக்கும்."
 ];
+
 function dayOfYear(d){
   const start = new Date(Date.UTC(d.getUTCFullYear(),0,0));
   return Math.floor((d - start)/86400000);
 }
+
 function renderRasiPalan(){
   const today = new Date();
   const doy = dayOfYear(today);
@@ -336,16 +330,17 @@ function renderRasiPalan(){
   }).join('');
 }
 
-/* ---------- Porutham (Tara Balam - nakshatra counting) ---------- */
+/* Porutham */
 function taraBalam(boyIdx, girlIdx){
   const countForward = (a,b)=> ((b-a+27)%27)+1;
   const c1 = countForward(boyIdx, girlIdx);
   const c2 = countForward(girlIdx, boyIdx);
-  const badRemainders = [3,5,7]; // Vipat, Pratyak, Naidhana taras (simplified)
+  const badRemainders = [3,5,7];
   const r1 = c1 % 9, r2 = c2 % 9;
   const good = !badRemainders.includes(r1) && !badRemainders.includes(r2);
   return { c1, c2, good };
 }
+
 function renderStarSelects(){
   const boy = document.getElementById('starBoy');
   const girl = document.getElementById('starGirl');
@@ -353,6 +348,7 @@ function renderStarSelects(){
   boy.innerHTML = opts;
   girl.innerHTML = opts;
 }
+
 function handlePoruthamCheck(){
   const boyIdx = parseInt(document.getElementById('starBoy').value);
   const girlIdx = parseInt(document.getElementById('starGirl').value);
@@ -363,11 +359,11 @@ function handlePoruthamCheck(){
     <h3>${result.good ? "✅ தார பலம் பொருந்துகிறது" : "⚠️ தார பலத்தில் குறை உள்ளது"}</h3>
     <p>${NAKSHATRA[boyIdx]} → ${NAKSHATRA[girlIdx]}: எண்ணிக்கை ${result.c1}<br>
     ${NAKSHATRA[girlIdx]} → ${NAKSHATRA[boyIdx]}: எண்ணிக்கை ${result.c2}</p>
-    <p>${result.good ? "இந்த இரு நட்சத்திரங்களுக்கும் இடையே அடிப்படை தார பலப் பொருத்தம் நல்ல முறையில் அமைந்துள்ளது." : "விபத், பிரத்யக் அல்லது நைதன தாரையில் விழுவதால் கூடுதல் கவனம் தேவை. முழு பொருத்தத்திற்கு ஜோதிடரை அணுகவும்."}</p>
+    <p>${result.good ? "இந்த இரு நட்சத்திரங்களுக்கும் இடையே அடிப்படை தார பலப் பொருத்தம் நல்ல முறையில் அமைந்துள்ளது." : "விபத், பிரத்யக் அல்லது நைதன தாரையில் விழுவதால் கூடுதல் கவனம் தேவை."}</p>
   `;
 }
 
-/* ---------- Festivals & Muhurtham (static curated data 2026) ---------- */
+/* Static Lists */
 const FESTIVALS_2026 = [
   ["ஜன. 14", "தை பொங்கல்"],
   ["ஜன. 15", "மாட்டுப் பொங்கல்"],
@@ -382,6 +378,7 @@ const FESTIVALS_2026 = [
   ["நவ. 8", "தீபாவளி"],
   ["டிச. 31", "மார்கழி மாத தொடக்கம்"]
 ];
+
 const MUHURTHAM_2026 = [
   ["ஜன. 22", "திருமணம் - சுப முகூர்த்தம்"],
   ["பிப். 5", "கிரகப்பிரவேசம்"],
@@ -391,21 +388,95 @@ const MUHURTHAM_2026 = [
   ["ஆக. 12", "காது குத்து விழா"],
   ["செப். 9", "கிரகப்பிரவேசம்"],
   ["நவ. 25", "திருமணம் - சுப முகூர்த்தம்"]
-];
+];const calGrid = document.getElementById("calGrid");
+
+let currentDate = new Date();
+
+function renderCalendar() {
+
+    calGrid.innerHTML = "";
+
+    const year = currentDate.getFullYear();
+
+    const month = currentDate.getMonth();
+
+    const today = new Date();
+
+    const firstDay = new Date(year, month, 1);
+
+    const lastDay = new Date(year, month + 1, 0);
+
+    const startDay = firstDay.getDay();
+
+    const totalDays = lastDay.getDate();
+
+    // Empty cells
+
+    for (let i = 0; i < startDay; i++) {
+
+        const empty = document.createElement("div");
+
+        calGrid.appendChild(empty);
+
+    }
+
+    // Days
+
+    for (let day = 1; day <= totalDays; day++) {
+
+        const cell = document.createElement("div");
+
+        cell.className =
+        "aspect-square rounded-xl border border-white/10 flex items-center justify-center cursor-pointer hover:bg-orange-500/20 transition";
+
+        cell.innerHTML = day;
+
+        // Highlight Today
+
+        if (
+
+            day === today.getDate() &&
+
+            month === today.getMonth() &&
+
+            year === today.getFullYear()
+
+        ) {
+
+            cell.classList.add(
+
+                "bg-amber-500",
+
+                "text-black",
+
+                "font-bold"
+
+            );
+
+        }
+
+        calGrid.appendChild(cell);
+
+    }
+
+}
+
+renderCalendar();
+
 function renderStaticLists(){
-  document.getElementById('festList').innerHTML = FESTIVALS_2026.map(([d,n])=>
+  document.getElementById('festList').innerHTML = FESTIVALS_2026.map(([d,n]) =>
     `<div class="fest-item"><div class="fdate">${d}</div><div class="fname">${n}</div></div>`).join('');
-  document.getElementById('muhurthamList').innerHTML = MUHURTHAM_2026.map(([d,n])=>
+  document.getElementById('muhurthamList').innerHTML = MUHURTHAM_2026.map(([d,n]) =>
     `<div class="muh-item"><div class="mdate">${d}</div><div class="mname">${n}</div></div>`).join('');
 }
 
-/* ---------- Nav toggle ---------- */
-document.getElementById('navToggle')?.addEventListener('click', ()=>{
+/* Nav Toggle */
+document.getElementById('navToggle')?.addEventListener('click', () => {
   document.querySelector('.main-nav').classList.toggle('open');
 });
 
-/* ---------- Init ---------- */
-document.addEventListener('DOMContentLoaded', ()=>{
+/* Init */
+document.addEventListener('DOMContentLoaded', () => {
   const dateInput = document.getElementById('dateInput');
   dateInput.value = new Date().toISOString().slice(0,10);
 
@@ -418,4 +489,18 @@ document.addEventListener('DOMContentLoaded', ()=>{
   document.getElementById('cityInput').addEventListener('change', renderToday);
   document.getElementById('jathagamForm').addEventListener('submit', handleJathagamSubmit);
   document.getElementById('checkPorutham').addEventListener('click', handlePoruthamCheck);
-});
+});function previousMonth(){
+
+    currentDate.setMonth(currentDate.getMonth()-1);
+
+    renderCalendar();
+
+}
+
+function nextMonth(){
+
+    currentDate.setMonth(currentDate.getMonth()+1);
+
+    renderCalendar();
+
+}

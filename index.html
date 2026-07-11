@@ -21,54 +21,8 @@
 <meta name="theme-color" content="#8c2f22">
 <meta name="google-site-verification" content="W2U2GWZ15MZSLIfdau-xHzwiD-Z9TUqTjDm7PvHnTFs" />
 <link rel="manifest" href="manifest.json">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@500;700;900&family=Noto+Sans+Tamil:wght@400;500;600;700&family=Martel:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "கடல்நிலா பஞ்சாங்கம்",
-  "alternateName": "Tamil Panchangam & Jothidam",
-  "url": "https://kadalnilapanchangam.pages.dev",
-  "inLanguage": "ta",
-  "description": "இன்றைய தமிழ் பஞ்சாங்கம், ஜாதகம், ராசி பலன், பொருத்தம் மற்றும் பண்டிகை நாட்காட்டி",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": "https://kadalnilapanchangam.pages.dev/?date={search_term_string}",
-    "query-input": "required name=search_term_string"
-  }
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "இன்றைய ராகு காலம் என்ன?",
-      "acceptedAnswer": { "@type": "Answer", "text": "ராகு காலம் ஒவ்வொரு நாளும் மாறுபடும், அது வாரத்தின் நாள் மற்றும் சூரிய உதய-அஸ்தமன நேரத்தைப் பொறுத்து கணக்கிடப்படுகிறது. உங்கள் ஊருக்கான துல்லியமான ராகு காலத்தை இந்த பக்கத்தின் மேலே காணலாம்." }
-    },
-    {
-      "@type": "Question",
-      "name": "இன்றைய நட்சத்திரம் மற்றும் திதி எப்படி அறிவது?",
-      "acceptedAnswer": { "@type": "Answer", "text": "சந்திரன் மற்றும் சூரியனின் நிலைமானத்தை வைத்து திதி மற்றும் நட்சத்திரம் கணக்கிடப்படுகிறது. இந்த பஞ்சாங்கப் பக்கத்தில் இன்றைய தேதிக்கான திதி, நட்சத்திரம் தானாக காண்பிக்கப்படும்." }
-    },
-    {
-      "@type": "Question",
-      "name": "நட்சத்திர பொருத்தம் எப்படி பார்ப்பது?",
-      "acceptedAnswer": { "@type": "Answer", "text": "மணமகன் மற்றும் மணமகளின் நட்சத்திரங்களை தேர்ந்தெடுத்து, தார பலம் அடிப்படையிலான அடிப்படை பொருத்தத்தை இந்த தளத்தில் இலவசமாக அறியலாம்." }
-    },
-    {
-      "@type": "Question",
-      "name": "ஜாதகம் எப்படி கணக்கிடப்படுகிறது?",
-      "acceptedAnswer": { "@type": "Answer", "text": "பிறந்த தேதி, நேரம், இடத்தை வைத்து சூரிய ராசி, சந்திர ராசி, ஜென்ம நட்சத்திரம் மற்றும் கிரக நிலைகள் கணக்கிடப்படுகின்றன." }
-    }
-  ]
-}
-</script>
+<script src="script.js"></script>
 </head>
 <body>
 
@@ -86,7 +40,12 @@
       <a href="#rasipalan">ராசி பலன்</a>
       <a href="#porutham">பொருத்தம்</a>
       <a href="#pandigai">பண்டிகைகள்</a>
-      <a href="#muhurtham">முகூர்த்தம்</a>
+      <a href="#muhurtham">முகூர்த்தம்</a><nav class="main-nav">
+  <a href="#panchangam">பஞ்சாங்கம்</a>
+  <a href="#jathagam">ஜாதகம்</a>
+  ...
+  <a href="muhurtham.html">முகூர்த்தம்</a>   <!-- புதியது -->
+</nav>
     </nav>
     <button class="nav-toggle" id="navToggle" aria-label="பட்டியலைத் திற">☰</button>
   </div>
@@ -132,12 +91,30 @@
         <option value="Coimbatore" data-lat="11.0168" data-lon="76.9558">கோயம்புத்தூர்</option>
         <option value="Trichy" data-lat="10.7905" data-lon="78.7047">திருச்சிராப்பள்ளி</option>
         <option value="Thanjavur" data-lat="10.7870" data-lon="79.1378">தஞ்சாவூர்</option>
+<<<<<<< HEAD
         <option value="Salem" data-lat="11.6643" data-lon="78.1460">சேலம்</option>
         <option value="Tirunelveli" data-lat="8.7139" data-lon="77.7560">திருநெல்வேலி</option>
         <option value="Vellore" data-lat="12.9165" data-lon="79.1325">வேலூர்</option>
         <option value="Erode" data-lat="11.3410" data-lon="77.7172">ஈரோடு</option>
 
 
+=======
+        <option value="Tirunelveli" data-lat="8.7139" data-lon="77.7564">திருநெல்வேலி</option>
+        <option value="Salem" data-lat="11.6643" data-lon="78.1460">சேலம்</option>
+        <option value="Vellore" data-lat="12.9165" data-lon="79.1325">வேலூர்</option>
+        <option value="Erode" data-lat="11.3410" data-lon="77.7172">ஈரோடு</option>
+        <option value="Kanchipuram" data-lat="12.8342" data-lon="79.7036">காஞ்சிபுரம்</option>
+        <option value="Kumbakonam" data-lat="10.9601" data-lon="79.3832">கும்பகோணம்</option>
+        <option value="Puducherry" data-lat="11.9416" data-lon="79.8083">புதுச்சேரி</option>
+        <option value="Vijayawada" data-lat="16.5062" data-lon="80.6480">விஜயவாடா</option>
+        <option value="Hyderabad" data-lat="17.3850" data-lon="78.4867">ஹைதராபாத்</option>
+        <option value="malaysia" data-lat="3.1390" data-lon="101.6869">மலேசியா</option>
+        <option value="singapore" data-lat="1.3521" data-lon="103.8198">சிங்கப்பூர்</option>
+        
+
+
+              
+>>>>>>> 0c9f027bdd6d85502b276cf76bc3b3e95238226d
       </select>
       <label for="dateInput">📅 தேதி:</label>
       <input type="date" id="dateInput">
@@ -153,7 +130,21 @@
       <div class="kalam-grid" id="kalamGrid"></div>
       <p class="disclaimer">* இந்தக் கணிப்புகள் வானியல் தோராய சூத்திரங்களைப் (Lahiri Ayanamsa) பயன்படுத்தி கணக்கிடப்படுகின்றன. அச்சு பஞ்சாங்கங்களுடன் சிறு நிமிட வித்தியாசம் இருக்கலாம்.</p>
     </div>
-  </section>
+  </section><section class="nalla-neram-card">
+    <h2>🌞 இன்று நல்ல நேரம்</h2>
+
+    <div class="neram-box">
+        <div class="time-item">
+            <h3>காலை</h3>
+            <p id="morningNallaNeram">06:15 AM - 07:15 AM</p>
+        </div>
+
+        <div class="time-item">
+            <h3>மாலை</h3>
+            <p id="eveningNallaNeram">04:45 PM - 05:45 PM</p>
+        </div>
+    </div>
+</section>
 
   <section id="jathagam" class="section alt">
     <div class="wrap">
@@ -178,10 +169,24 @@
             <option value="Coimbatore" data-lat="11.0168" data-lon="76.9558">கோயம்புத்தூர்</option>
             <option value="Trichy" data-lat="10.7905" data-lon="78.7047">திருச்சிராப்பள்ளி</option>
             <option value="Thanjavur" data-lat="10.7870" data-lon="79.1378">தஞ்சாவூர்</option>
+<<<<<<< HEAD
             <option value="Salem" data-lat="11.6643" data-lon="78.1460">சேலம்</option>
             <option value="Tirunelveli" data-lat="8.7139" data-lon="77.7560">திருநெல்வேலி</option>
             <option value="Vellore" data-lat="12.9165" data -lon="79.1325">வேலூர்</option>
             <option value="Erode" data-lat="11.3410" data-lon="77.7172">ஈரோடு</option>  
+=======
+            <option value="Tirunelveli" data-lat="8.7139" data-lon="77.7564">திருநெல்வேலி</option>
+            <option value="Salem" data-lat="11.6643" data-lon="78.1460">சேலம்</option>
+            <option value="Vellore" data-lat="12.9165" data-lon="79.1325">வேலூர்</option>
+            <option value="Erode" data-lat="11.3410" data-lon="77.7172">ஈரோடு</option>
+            <option value="Kanchipuram" data-lat="12.8342"  data-lon="79.7036">காஞ்சிபுரம்</option>
+            <option value="Kumbakonam" data-lat="10.9601" data-lon="79.3832">கும்பகோணம்</option>
+            <option value="Puducherry" data-lat="11.9416" data-lon="79.8083">புதுச்சேரி</option>
+            <option value="Vijayawada" data-lat="16.5062  " data-lon="80.6480">விஜயவாடா</option>
+            <option value="Hyderabad" data-lat="17.3850" data-lon="78.4867">ஹைதராபாத்</option>
+            <option value="malaysia" data-lat="3.1390" data-lon="101.6869">மலேசியா</option>
+            <option value="singapore" data-lat="1.3521" data-l  on="103.8198">சிங்கப்பூர்</option>
+>>>>>>> 0c9f027bdd6d85502b276cf76bc3b3e95238226d
           </select>
         </div>
         <button type="submit" class="btn-primary">ஜாதகம் காண்க</button>
@@ -270,8 +275,8 @@
   <div class="wrap">
     <p>© 2026 கடல்நிலா பஞ்சாங்கம் · நாகப்பட்டினம் · தமிழக மக்களுக்காக அன்புடன் உருவாக்கப்பட்டது</p>
   </div>
-</footer>
+</footer><button onclick="toast('ஜூன் 2026 விரைவில்')"><button onclick="toast('ஜூன் 2026 விரைவில்')">
+  <button onclick="toast('ஆகஸ்ட் 2026 விரைவில்')"><button onclick="toast('ஆகஸ்ட் 2026 விரைவில்')">
 
-<script src="script.js"></script>
 </body>
 </html>

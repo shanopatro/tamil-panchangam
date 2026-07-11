@@ -34,7 +34,7 @@ a{color:inherit;text-decoration:none;}
 h1,h2,h3{font-family:var(--font-display);color:var(--vermilion-deep);margin:0 0 8px;}
 .hidden{display:none !important;}
 
-/* thread decoration - signature element strip at top */
+/* thread decoration */
 .thread-deco{
   height:6px;
   background:repeating-linear-gradient(90deg,var(--turmeric) 0 22px, var(--vermilion) 22px 44px, var(--indigo) 44px 66px);
@@ -66,7 +66,7 @@ h1,h2,h3{font-family:var(--font-display);color:var(--vermilion-deep);margin:0 0 
 .chip.accent{background:var(--vermilion);color:#fff;border-color:var(--vermilion-deep);}
 .chip b{font-family:var(--font-data);}
 
-/* Signature element: Ola-leaf card */
+/* Ola-leaf */
 .ola-leaf{
   position:relative;
   background:linear-gradient(180deg,#EFDDAE,#E5CE93);
@@ -107,7 +107,7 @@ h1,h2,h3{font-family:var(--font-display);color:var(--vermilion-deep);margin:0 0 
 .section-title{font-size:1.9rem;margin-bottom:14px;}
 .section-desc{color:var(--ink-soft);max-width:640px;margin-bottom:26px;}
 
-/* Panchangam grid */
+/* Panchangam */
 .panch-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:24px;}
 .panch-grid .pcard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow);}
 .pcard .pk{font-size:.78rem;color:var(--ink-soft);text-transform:uppercase;letter-spacing:1px;}
@@ -120,7 +120,7 @@ h1,h2,h3{font-family:var(--font-display);color:var(--vermilion-deep);margin:0 0 
 
 .disclaimer{font-size:.82rem;color:var(--ink-soft);margin-top:20px;font-style:italic;}
 
-/* Jathagam form */
+/* Jathagam */
 .jform{display:flex;flex-wrap:wrap;gap:16px;align-items:end;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);}
 .jfield{display:flex;flex-direction:column;gap:6px;}
 .jfield label{font-size:.85rem;color:var(--ink-soft);font-weight:600;}
@@ -140,11 +140,41 @@ h1,h2,h3{font-family:var(--font-display);color:var(--vermilion-deep);margin:0 0 
 .graha-table th{background:var(--vermilion-deep);color:#fff;font-family:var(--font-display);}
 .graha-table tr:last-child td{border-bottom:none;}
 
-/* Rasi grid */
+/* Rasi Palan */
 .rasi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;}
 .rasi-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);}
 .rasi-card h3{font-size:1.1rem;margin-bottom:6px;}
-.rasi-card p{font-size:.9rem;color:var(--ink-soft);margin:0;}
+.rasi-card p{font-size:.9rem;color:var(--ink-soft);margin:0;}.nalla-neram-card{
+    background:#ffffff;
+    border-radius:15px;
+    padding:20px;
+    margin-top:20px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+.nalla-neram-card h2{
+    text-align:center;
+    color:#d97706;
+}
+
+.neram-box{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    margin-top:15px;
+}
+
+.time-item{
+    flex:1;
+    background:#fff7ed;
+    padding:15px;
+    border-radius:10px;
+    text-align:center;
+}
+
+.time-item h3{
+    margin-bottom:8px;
+}
 
 /* Porutham */
 .porutham-form{display:flex;flex-wrap:wrap;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);}
@@ -153,7 +183,7 @@ h1,h2,h3{font-family:var(--font-display);color:var(--vermilion-deep);margin:0 0 
 .porutham-result{margin-top:20px;background:var(--card);border-left:5px solid var(--vermilion);border-radius:8px;padding:18px 22px;box-shadow:var(--shadow);}
 .porutham-result h3{margin-bottom:8px;}
 
-/* Festival & Muhurtham lists */
+/* Festival & Muhurtham */
 .fest-list, .muhurtham-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;}
 .fest-item, .muh-item{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--turmeric);border-radius:10px;padding:14px 18px;box-shadow:var(--shadow);}
 .fest-item .fdate, .muh-item .mdate{font-family:var(--font-data);font-weight:700;color:var(--vermilion-deep);font-size:.9rem;}
@@ -189,7 +219,7 @@ h1,h2,h3{font-family:var(--font-display);color:var(--vermilion-deep);margin:0 0 
   html{scroll-behavior:auto;}
 }
 
-/* Keyboard focus visibility */
+/* Focus */
 a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible{
   outline:3px solid var(--turmeric);outline-offset:2px;
 }
