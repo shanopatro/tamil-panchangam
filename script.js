@@ -226,7 +226,11 @@ function renderToday(){
   document.getElementById('olaKarana').textContent = p.karana;
   document.getElementById('olaSunrise').textContent = p.sunrise;
   document.getElementById('olaSunset').textContent = p.sunset;
+document.getElementById("morningNallaNeram").innerText =
+"06:15 AM - 07:15 AM";
 
+document.getElementById("eveningNallaNeram").innerText =
+"04:45 PM - 05:45 PM";
   const panchGrid = document.getElementById('panchGrid');
   panchGrid.innerHTML = `
     <div class="pcard"><div class="pk">திதி</div><div class="pv">${p.tithi}</div></div>
