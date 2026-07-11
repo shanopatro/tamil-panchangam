@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "tamil-panchangam-site",
+  "name": "tamil-panchangam",
   "compatibility_date": "2026-07-08",
   "assets": {
     "directory": "."
