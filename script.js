@@ -388,7 +388,80 @@ const MUHURTHAM_2026 = [
   ["ஆக. 12", "காது குத்து விழா"],
   ["செப். 9", "கிரகப்பிரவேசம்"],
   ["நவ. 25", "திருமணம் - சுப முகூர்த்தம்"]
-];
+];const calGrid = document.getElementById("calGrid");
+
+let currentDate = new Date();
+
+function renderCalendar() {
+
+    calGrid.innerHTML = "";
+
+    const year = currentDate.getFullYear();
+
+    const month = currentDate.getMonth();
+
+    const today = new Date();
+
+    const firstDay = new Date(year, month, 1);
+
+    const lastDay = new Date(year, month + 1, 0);
+
+    const startDay = firstDay.getDay();
+
+    const totalDays = lastDay.getDate();
+
+    // Empty cells
+
+    for (let i = 0; i < startDay; i++) {
+
+        const empty = document.createElement("div");
+
+        calGrid.appendChild(empty);
+
+    }
+
+    // Days
+
+    for (let day = 1; day <= totalDays; day++) {
+
+        const cell = document.createElement("div");
+
+        cell.className =
+        "aspect-square rounded-xl border border-white/10 flex items-center justify-center cursor-pointer hover:bg-orange-500/20 transition";
+
+        cell.innerHTML = day;
+
+        // Highlight Today
+
+        if (
+
+            day === today.getDate() &&
+
+            month === today.getMonth() &&
+
+            year === today.getFullYear()
+
+        ) {
+
+            cell.classList.add(
+
+                "bg-amber-500",
+
+                "text-black",
+
+                "font-bold"
+
+            );
+
+        }
+
+        calGrid.appendChild(cell);
+
+    }
+
+}
+
+renderCalendar();
 
 function renderStaticLists(){
   document.getElementById('festList').innerHTML = FESTIVALS_2026.map(([d,n]) =>
@@ -416,4 +489,18 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('cityInput').addEventListener('change', renderToday);
   document.getElementById('jathagamForm').addEventListener('submit', handleJathagamSubmit);
   document.getElementById('checkPorutham').addEventListener('click', handlePoruthamCheck);
-});
+});function previousMonth(){
+
+    currentDate.setMonth(currentDate.getMonth()-1);
+
+    renderCalendar();
+
+}
+
+function nextMonth(){
+
+    currentDate.setMonth(currentDate.getMonth()+1);
+
+    renderCalendar();
+
+}
